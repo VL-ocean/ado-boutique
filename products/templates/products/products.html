@@ -135,7 +135,7 @@
 <div class="btt-button shadow-sm rounded-0 border border-black">
     <a class="btt-link d-flex h-100 text-decoration-none">
         <i class="fas fa-arrow-up text-black mx-auto my-auto"></i>
-    </a>	
+    </a>
 </div>
 {% endblock %}
 
@@ -143,32 +143,32 @@
 {{ block.super }}
 
 <script type="text/javascript">
-    // Scroll to top functionality
-    document.querySelectorAll('.btt-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-            window.scrollTo(0, 0);
-        });
-    });
+    $('.btt-link').click(function (e) {
+        window.scrollTo(0, 0)
+    })
 </script>
 
 <script type="text/javascript">
-    // Sort selector change handler
-    document.getElementById('sort-selector').addEventListener('change', (e) => {
-        const selector = e.target;
-        const currentUrl = new URL(window.location);
-        const selectedVal = selector.value;
+    $('#sort-selector').change(function () {
+        var selector = $(this);
+        var currentUrl = new URL(window.location);
 
-        if (selectedVal !== "reset") {
-            const [sort, direction] = selectedVal.split("_");
+        var selectedVal = selector.val();
+        if (selectedVal != "reset") {
+            var sort = selectedVal.split("_")[0];
+            var direction = selectedVal.split("_")[1];
+
             currentUrl.searchParams.set("sort", sort);
             currentUrl.searchParams.set("direction", direction);
+
             window.location.replace(currentUrl);
         } else {
             currentUrl.searchParams.delete("sort");
             currentUrl.searchParams.delete("direction");
+
             window.location.replace(currentUrl);
         }
-    });
+    })
 </script>
 
 {% endblock %}
